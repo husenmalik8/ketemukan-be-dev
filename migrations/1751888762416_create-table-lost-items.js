@@ -42,6 +42,12 @@ exports.up = (pgm) => {
       notNull: true,
     },
   });
+
+  pgm.addConstraint(
+    'lost_items',
+    'fk_lost_items__user_id',
+    'FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE'
+  );
 };
 
 exports.down = (pgm) => {

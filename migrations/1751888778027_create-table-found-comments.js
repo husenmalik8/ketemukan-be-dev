@@ -30,6 +30,18 @@ exports.up = (pgm) => {
       notNull: true,
     },
   });
+
+  pgm.addConstraint(
+    'found_comments',
+    'fk_found_comments__found_item_id',
+    'FOREIGN KEY(found_item_id) REFERENCES found_items(id) ON DELETE CASCADE'
+  );
+
+  pgm.addConstraint(
+    'found_comments',
+    'fk_found_comments__user_id',
+    'FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE'
+  );
 };
 
 exports.down = (pgm) => {
