@@ -1,18 +1,41 @@
-/**
- * @type {import('node-pg-migrate').ColumnDefinitions | undefined}
- */
-export const shorthands = undefined;
+/* eslint-disable camelcase */
 
-/**
- * @param pgm {import('node-pg-migrate').MigrationBuilder}
- * @param run {() => void | undefined}
- * @returns {Promise<void> | void}
- */
-export const up = (pgm) => {};
+exports.up = (pgm) => {
+  pgm.createTable('users', {
+    id: {
+      type: 'VARCHAR(50)',
+      primaryKey: true,
+    },
 
-/**
- * @param pgm {import('node-pg-migrate').MigrationBuilder}
- * @param run {() => void | undefined}
- * @returns {Promise<void> | void}
- */
-export const down = (pgm) => {};
+    username: {
+      type: 'TEXT',
+      unique: true,
+      notNull: true,
+    },
+    password: {
+      type: 'TEXT',
+      notNull: true,
+    },
+    fullname: {
+      type: 'TEXT',
+      notNull: true,
+    },
+    profile_picture: {
+      type: 'TEXT',
+      notNull: false,
+    },
+
+    created_at: {
+      type: 'TEXT',
+      notNull: true,
+    },
+    updated_at: {
+      type: 'TEXT',
+      notNull: true,
+    },
+  });
+};
+
+exports.down = (pgm) => {
+  pgm.dropTable('users');
+};

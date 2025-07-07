@@ -1,18 +1,37 @@
-/**
- * @type {import('node-pg-migrate').ColumnDefinitions | undefined}
- */
-export const shorthands = undefined;
+/* eslint-disable camelcase */
 
-/**
- * @param pgm {import('node-pg-migrate').MigrationBuilder}
- * @param run {() => void | undefined}
- * @returns {Promise<void> | void}
- */
-export const up = (pgm) => {};
+exports.up = (pgm) => {
+  pgm.createTable('lost_comments', {
+    id: {
+      type: 'VARCHAR(50)',
+      primaryKey: true,
+    },
 
-/**
- * @param pgm {import('node-pg-migrate').MigrationBuilder}
- * @param run {() => void | undefined}
- * @returns {Promise<void> | void}
- */
-export const down = (pgm) => {};
+    comment: {
+      type: 'TEXT',
+      notNull: true,
+    },
+
+    created_at: {
+      type: 'TEXT',
+      notNull: true,
+    },
+    updated_at: {
+      type: 'TEXT',
+      notNull: true,
+    },
+
+    lost_item_id: {
+      type: 'TEXT',
+      notNull: true,
+    },
+    user_id: {
+      type: 'TEXT',
+      notNull: true,
+    },
+  });
+};
+
+exports.down = (pgm) => {
+  pgm.dropTable('lost_comments');
+};
