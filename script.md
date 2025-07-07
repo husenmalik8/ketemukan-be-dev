@@ -26,9 +26,9 @@ ALTER DATABASE ketemukan_v1 OWNER TO developer;
 migrations
 ==========
 npm run migrate create "create table users"
+npm run migrate create "create table authentications"
 npm run migrate create "create table lost_items"
 npm run migrate create "create table found_items"
-npm run migrate create "create table authentications"
 npm run migrate create "create table lost_comments"
 npm run migrate create "create table found_comments"
 
