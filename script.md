@@ -18,9 +18,9 @@ datauri
 database
 ==========
 psql --username postgres
-CREATE DATABASE xxx;
-GRANT ALL ON DATABASE xxx TO developer;
-ALTER DATABASE xxx OWNER TO developer;
+CREATE DATABASE ketemukan_v1;
+GRANT ALL ON DATABASE ketemukan_v1 TO developer;
+ALTER DATABASE ketemukan_v1 OWNER TO developer;
 
 ==========
 migrations
