@@ -7,10 +7,16 @@ class LostsHandler {
   postLostHandler = async (request, h) => {
     this._validator.validateLostPayload(request.payload);
 
-    const { name } = request.payload;
-    const { id: owner } = request.auth.credentials;
+    const { title, shortDesc, description, lostDate } = request.payload;
+    const { id: userId } = request.auth.credentials;
 
-    const lostId = await this._service.addLost({ name, owner });
+    const lostId = await this._service.addLost({
+      title,
+      shortDesc,
+      description,
+      lostDate,
+      userId,
+    });
 
     const response = h.response({
       status: 'success',
