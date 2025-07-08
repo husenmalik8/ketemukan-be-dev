@@ -3,18 +3,18 @@ const { nanoid } = require('nanoid');
 const ServerError = require('../../exceptions/ServerError');
 const InvariantError = require('../../exceptions/InvariantError');
 
-class PlaylistsService {
+class LostsService {
   constructor() {
     this._pool = new Pool();
   }
 
-  async addPlaylist({ name, owner }) {
-    const id = `playlist-${nanoid(16)}`;
+  async addLost({ name, owner }) {
+    const id = `lost-${nanoid(16)}`;
     const createdAt = new Date().toISOString();
     const updatedAt = createdAt;
 
     const query = {
-      text: 'INSERT INTO playlists(id, name, owner, created_at, updated_at) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+      text: 'INSERT INTO losts(id, name, owner, created_at, updated_at) VALUES ($1, $2, $3, $4, $5) RETURNING id',
       values: [id, name, owner, createdAt, updatedAt],
     };
 
@@ -26,11 +26,11 @@ class PlaylistsService {
     const resultId = result.rows[0].id;
 
     if (!resultId) {
-      throw new InvariantError('Song gagal ditambahkan');
+      throw new InvariantError('Lost item gagal ditambahkan');
     }
 
     return resultId;
   }
 }
 
-module.exports = PlaylistsService;
+module.exports = LostsService;
