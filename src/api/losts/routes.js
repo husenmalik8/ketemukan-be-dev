@@ -1,10 +1,10 @@
 const routes = (handler) => [
   {
     method: 'POST',
-    path: '/playlists',
-    handler: handler.postPlaylistHandler,
+    path: '/losts',
+    handler: handler.postLostHandler,
     options: {
-      auth: 'musicapp_jwt',
+      auth: 'ketemukan_jwt',
     },
   },
 ];
