@@ -13,6 +13,11 @@ const albums = require('./api/albums');
 const AlbumsService = require('./services/postgres/AlbumsService');
 const AlbumsValidator = require('./validator/albums');
 
+// losts
+const losts = require('./api/losts');
+const LostsService = require('./services/postgres/LostsService');
+const LostsValidator = require('./validator/losts');
+
 // users
 const users = require('./api/users');
 const UsersService = require('./services/postgres/UsersService');
@@ -30,6 +35,7 @@ const UploadsValidator = require('./validator/uploads');
 
 const init = async () => {
   const albumsService = new AlbumsService();
+  const lostsService = new LostsService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
   const storageService = new StorageService(
@@ -77,6 +83,13 @@ const init = async () => {
       options: {
         service: albumsService,
         validator: AlbumsValidator,
+      },
+    },
+    {
+      plugin: losts,
+      options: {
+        service: lostsService,
+        validator: LostsValidator,
       },
     },
     {
