@@ -12,6 +12,11 @@ const albums = require('./api/albums');
 const AlbumsService = require('./services/postgres/AlbumsService');
 const AlbumsValidator = require('./validator/albums');
 
+// users
+const users = require('./api/users');
+const UsersService = require('./services/postgres/UsersService');
+const UsersValidator = require('./validator/users');
+
 // uploads
 const uploads = require('./api/uploads');
 const StorageService = require('./services/storage/StorageService');
@@ -19,6 +24,7 @@ const UploadsValidator = require('./validator/uploads');
 
 const init = async () => {
   const albumsService = new AlbumsService();
+  const usersService = new UsersService();
   const storageService = new StorageService(
     path.resolve(__dirname, 'api/uploads/file/images')
   );
@@ -64,6 +70,13 @@ const init = async () => {
       options: {
         service: albumsService,
         validator: AlbumsValidator,
+      },
+    },
+    {
+      plugin: users,
+      options: {
+        service: usersService,
+        validator: UsersValidator,
       },
     },
     {
