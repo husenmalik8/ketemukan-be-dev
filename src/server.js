@@ -18,6 +18,10 @@ const losts = require('./api/losts');
 const LostsService = require('./services/postgres/LostsService');
 const LostsValidator = require('./validator/losts');
 
+// lost-comments
+const lostComments = require('./api/lost-comments');
+const LostCommentsValidator = require('./validator/lost-comments');
+
 // founds
 const founds = require('./api/founds');
 const FoundsService = require('./services/postgres/FoundsService');
@@ -96,6 +100,13 @@ const init = async () => {
       options: {
         service: lostsService,
         validator: LostsValidator,
+      },
+    },
+    {
+      plugin: lostComments,
+      options: {
+        service: lostsService,
+        validator: LostCommentsValidator,
       },
     },
     {

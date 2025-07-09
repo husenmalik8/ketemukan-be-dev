@@ -71,6 +71,30 @@ class LostsService {
 
     return result.rows[0];
   }
+
+  async addLostComment({ comment, lostId, userId }) {
+    const id = `lost-comment-${nanoid(16)}`;
+    const createdAt = new Date().toISOString();
+    const updatedAt = createdAt;
+
+    const query = {
+      text: 'INSERT INTO lost_comments(id, comment, created_at, updated_at, lost_item_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
+      values: [id, comment, createdAt, updatedAt, lostId, userId],
+    };
+
+    const result = await this._pool.query(query).catch((error) => {
+      console.error(error);
+      throw new ServerError('Internal server error');
+    });
+
+    const resultId = result.rows[0].id;
+
+    if (!resultId) {
+      throw new InvariantError('Lost item gagal ditambahkan');
+    }
+
+    return resultId;
+  }
 }
 
 module.exports = LostsService;
