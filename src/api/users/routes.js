@@ -4,6 +4,14 @@ const routes = (handler) => [
     path: '/users',
     handler: handler.postUserHandler,
   },
+  {
+    method: 'GET',
+    path: '/users',
+    handler: handler.getUserHandler,
+    options: {
+      auth: 'ketemukan_jwt',
+    },
+  },
 ];
 
 module.exports = routes;

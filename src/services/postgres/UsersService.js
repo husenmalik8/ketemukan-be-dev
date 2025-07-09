@@ -35,7 +35,7 @@ class UsersService {
 
   async verifyNewUsername(username) {
     const query = {
-      text: 'SELECT username from users WHERE username = $1',
+      text: 'SELECT username FROM users WHERE username = $1',
       values: [username],
     };
 
@@ -49,6 +49,24 @@ class UsersService {
         'Gagal menambahkan user. Username sudah digunakan.'
       );
     }
+  }
+
+  async getProfileUser(userId) {
+    const query = {
+      text: 'SELECT id, username, fullname, profile_picture FROM users WHERE id = $1',
+      values: [userId],
+    };
+
+    const result = await this._pool.query(query).catch((error) => {
+      console.error(error);
+      throw new ServerError('Internal server error');
+    });
+
+    if (!result.rows.length) {
+      throw new NotFoundError('User tidak ditemukan');
+    }
+
+    return result.rows[0];
   }
 }
 

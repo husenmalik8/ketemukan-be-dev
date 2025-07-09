@@ -24,6 +24,18 @@ class UsersHandler {
     response.code(201);
     return response;
   };
+
+  getUserHandler = async (request) => {
+    const { id: userId } = request.auth.credentials;
+    const userDetail = await this._service.getProfileUser(userId);
+
+    return {
+      status: 'success',
+      data: {
+        userDetail,
+      },
+    };
+  };
 }
 
 module.exports = UsersHandler;
