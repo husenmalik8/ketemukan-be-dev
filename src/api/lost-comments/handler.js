@@ -11,6 +11,7 @@ class LostCommentsHandler {
     const { id: userId } = request.auth.credentials;
     const { id: lostId } = request.params;
 
+    await this._service.verifyLostItem(lostId);
     const commentId = await this._service.addLostComment({
       comment,
       lostId,
