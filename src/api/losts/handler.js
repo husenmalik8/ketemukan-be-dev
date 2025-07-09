@@ -28,6 +28,16 @@ class LostsHandler {
     response.code(201);
     return response;
   };
+
+  getLostsHandler = async () => {
+    const losts = await this._service.getLosts();
+    return {
+      status: 'success',
+      data: {
+        losts,
+      },
+    };
+  };
 }
 
 module.exports = LostsHandler;

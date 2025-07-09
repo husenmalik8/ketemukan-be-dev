@@ -40,6 +40,19 @@ class LostsService {
 
     return resultId;
   }
+
+  async getLosts() {
+    const query = {
+      text: 'SELECT id, title, short_desc, picture, lost_date FROM lost_items',
+    };
+
+    const result = await this._pool.query(query).catch((error) => {
+      console.error(error);
+      throw new ServerError('Internal server error');
+    });
+
+    return result.rows;
+  }
 }
 
 module.exports = LostsService;
