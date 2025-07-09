@@ -1,19 +1,19 @@
-class LostCommentsHandler {
+class FoundCommentsHandler {
   constructor(service, validator) {
     this._service = service;
     this._validator = validator;
   }
 
-  postLostCommentHandler = async (request, h) => {
-    this._validator.validateLostCommentPayload(request.payload);
+  postFoundCommentHandler = async (request, h) => {
+    this._validator.validateFoundCommentPayload(request.payload);
 
     const { comment } = request.payload;
     const { id: userId } = request.auth.credentials;
-    const { id: lostId } = request.params;
+    const { id: foundId } = request.params;
 
-    const commentId = await this._service.addLostComment({
+    const commentId = await this._service.addFoundComment({
       comment,
-      lostId,
+      foundId,
       userId,
     });
 
@@ -29,4 +29,4 @@ class LostCommentsHandler {
   };
 }
 
-module.exports = LostCommentsHandler;
+module.exports = FoundCommentsHandler;

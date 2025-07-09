@@ -1,8 +1,8 @@
 const routes = (handler) => [
   {
     method: 'POST',
-    path: '/losts/{id}/comments',
-    handler: handler.postLostCommentHandler,
+    path: '/found/{id}/comments',
+    handler: handler.postFoundCommentHandler,
     options: {
       auth: 'ketemukan_jwt',
     },

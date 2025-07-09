@@ -1,11 +1,11 @@
-const LostCommentsHandler = require('./handler');
+const FoundCommentsHandler = require('./handler');
 const routes = require('./routes');
 
 module.exports = {
-  name: 'lostComments',
+  name: 'foundComments',
   version: '1.0.0',
   register: async (server, { service, validator }) => {
-    const lostCommentsHandler = new LostCommentsHandler(service, validator);
-    server.route(routes(lostCommentsHandler));
+    const foundCommentsHandler = new FoundCommentsHandler(service, validator);
+    server.route(routes(foundCommentsHandler));
   },
 };
