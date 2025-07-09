@@ -11,6 +11,7 @@ class FoundCommentsHandler {
     const { id: userId } = request.auth.credentials;
     const { id: foundId } = request.params;
 
+    await this._service.verifyFoundItem(foundId);
     const commentId = await this._service.addFoundComment({
       comment,
       foundId,
