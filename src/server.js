@@ -27,6 +27,10 @@ const founds = require('./api/founds');
 const FoundsService = require('./services/postgres/FoundsService');
 const FoundsValidator = require('./validator/founds');
 
+// found-comments
+const foundComments = require('./api/found-comments');
+const FoundCommentsValidator = require('./validator/found-comments');
+
 // users
 const users = require('./api/users');
 const UsersService = require('./services/postgres/UsersService');
@@ -114,6 +118,13 @@ const init = async () => {
       options: {
         service: foundsService,
         validator: FoundsValidator,
+      },
+    },
+    {
+      plugin: foundComments,
+      options: {
+        service: foundsService,
+        validator: FoundCommentsValidator,
       },
     },
     {

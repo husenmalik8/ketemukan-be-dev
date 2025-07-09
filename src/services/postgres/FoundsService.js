@@ -72,6 +72,30 @@ class FoundsService {
 
     return result.rows[0];
   }
+
+  async addFoundComment({ comment, foundId, userId }) {
+    const id = `found-comment-${nanoid(16)}`;
+    const createdAt = new Date().toISOString();
+    const updatedAt = createdAt;
+
+    const query = {
+      text: 'INSERT INTO found_comments(id, comment, created_at, updated_at, found_item_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
+      values: [id, comment, createdAt, updatedAt, foundId, userId],
+    };
+
+    const result = await this._pool.query(query).catch((error) => {
+      console.error(error);
+      throw new ServerError('Internal server error');
+    });
+
+    const resultId = result.rows[0]?.id;
+
+    if (!resultId) {
+      throw new InvariantError('Komentar item ditemukan gagal ditambahkan');
+    }
+
+    return resultId;
+  }
 }
 
 module.exports = FoundsService;
