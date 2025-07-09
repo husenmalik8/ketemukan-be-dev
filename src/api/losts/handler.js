@@ -38,6 +38,18 @@ class LostsHandler {
       },
     };
   };
+
+  getLostByIdHandler = async (request) => {
+    const { id } = request.params;
+    const lostDetail = await this._service.getLostById(id);
+
+    return {
+      status: 'success',
+      data: {
+        lostDetail,
+      },
+    };
+  };
 }
 
 module.exports = LostsHandler;

@@ -12,6 +12,11 @@ const routes = (handler) => [
     path: '/losts',
     handler: handler.getLostsHandler,
   },
+  {
+    method: 'GET',
+    path: '/losts/{id}',
+    handler: handler.getLostByIdHandler,
+  },
 ];
 
 module.exports = routes;

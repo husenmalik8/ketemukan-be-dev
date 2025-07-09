@@ -53,6 +53,24 @@ class LostsService {
 
     return result.rows;
   }
+
+  async getLostById(id) {
+    const query = {
+      text: 'SELECT id, title, short_desc, description, picture, lost_date FROM lost_items WHERE id = $1',
+      values: [id],
+    };
+
+    const result = await this._pool.query(query).catch((error) => {
+      console.error(error);
+      throw new ServerError('Internal server error');
+    });
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Lost item tidak ditemukan');
+    }
+
+    return result.rows[0];
+  }
 }
 
 module.exports = LostsService;
