@@ -7,12 +7,12 @@ class LostCommentsHandler {
   postLostCommentHandler = async (request, h) => {
     this._validator.validateLostCommentPayload(request.payload);
 
-    const { content } = request.payload;
+    const { comment } = request.payload;
     const { id: userId } = request.auth.credentials;
     const { id: lostId } = request.params;
 
     const commentId = await this._service.addLostComment({
-      content,
+      comment,
       lostId,
       userId,
     });
